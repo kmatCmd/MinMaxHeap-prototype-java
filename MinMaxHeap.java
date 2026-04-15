@@ -170,15 +170,15 @@ public class MinMaxHeap<E extends Comparable<E>> implements InterMInMaxHeap<E> {
 
 
     private void pushDownMin(int node) {
-        if (node*2 + 1 < count - 1) { //czy  ma dzieci?
+        if (node*2 + 1 < count - 1) { //does have children
             int small = getSmallestDescendantsIndex(node);
             if (arr[small].compareTo(arr[node]) < 0) {
-                var tmp = arr[node]; //najmniejszy element na swoje miejsce
+                var tmp = arr[node]; // smallest lands to it's place
                 arr[node] = arr[small];
                 arr[small] = tmp;
-                if (small > node*2 + 2) { //indeks większy niż drugie dziecko == któryś wnuk
-                    if (arr[small].compareTo(arr[(small - 1) / 2]) > 0) { //po zamianie - czy element nie jest większy niż rodzic (największy z poddrzewa)
-                        tmp = arr[small]; //największy element poddrzewa na swoje miejsce
+                if (small > node*2 + 2) { //indeks bigger than other child => one of grandchildren
+                    if (arr[small].compareTo(arr[(small - 1) / 2]) > 0) { //after change - is not bigger than parent (hence biggest of subtree)
+                        tmp = arr[small]; //biggest subtree elem to it's place
                         arr[small] = arr[(small - 1) / 2];
                         arr[(small - 1) / 2] = tmp;
                     }
@@ -189,7 +189,7 @@ public class MinMaxHeap<E extends Comparable<E>> implements InterMInMaxHeap<E> {
     }
 
     private void pushDownMax(int node) {
-        if (node*2 + 1 < count - 1) { //czy  ma dzieci?
+        if (node*2 + 1 < count - 1) { //does have children
             int big=getBiggestDescendantsIndex(node);
         if (arr[big].compareTo(arr[node])>0){
             var tmp=arr[big];
